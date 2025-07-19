@@ -8,3 +8,4 @@ w3_l2 = Web3(Web3.HTTPProvider(L2_RPC))
 
 def get_balance(address, token_contract):
     return token_contract.functions.balanceOf(address).call()
+
