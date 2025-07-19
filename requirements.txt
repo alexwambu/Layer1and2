@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/web3@1.10.0/dist/web3.min.js"></script>
+</head>
+<body>
+  <button onclick="connect()">🦊 Connect MetaMask</button>
+  <p id="wallet"></p>
+
+  <script>
+    async function connect() {
+      if (window.ethereum) {
+        try {
+          await window.ethereum.request({ method: "eth_requestAccounts" });
+          window.web3 = new Web3(window.ethereum);
+          const accounts = await web3.eth.getAccounts();
+          const wallet = accounts[0];
+          document.getElementById("wallet").innerText = "Connected: " + wallet;
+          Streamlit.setComponentValue(wallet);
+        } catch (err) {
+          alert("❌ Connection Failed");
+        }
+      } else {
+        alert("❌ Please install MetaMask");
+      }
+    }
+  </script>
+</body>
+</html>
